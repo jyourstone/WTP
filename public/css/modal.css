@@ -1,0 +1,279 @@
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal */
+.modal {
+  background: var(--bg-card);
+  border-radius: var(--radius) var(--radius) 0 0;
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  padding-bottom: var(--safe-bottom);
+}
+
+.modal-overlay--visible .modal {
+  transform: translateY(0);
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 0;
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+  z-index: 1;
+}
+
+.modal__title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.modal__close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--text-muted);
+  border-radius: 50%;
+  background: var(--bg-elevated);
+}
+
+.modal__body {
+  padding: 16px;
+}
+
+/* Workout detail in modal */
+.workout-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.workout-detail__category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  align-self: flex-start;
+}
+
+.workout-detail__title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.workout-detail__notes {
+  font-size: 14px;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+}
+
+.workout-detail__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.workout-detail__complete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.workout-detail__complete-btn--pending {
+  background: var(--success);
+  color: white;
+}
+
+.workout-detail__complete-btn--completed {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+}
+
+.workout-detail__complete-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Day detail - list of workouts for a date */
+.day-detail__date {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.day-detail__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.day-detail__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.day-detail__item:active {
+  background: var(--bg-elevated);
+}
+
+.day-detail__item-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.day-detail__item-dot--completed {
+  position: relative;
+}
+
+.day-detail__item-dot--completed::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--bg);
+  border-radius: 50%;
+}
+
+.day-detail__item-title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.day-detail__item-title--completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.day-detail__item-check {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+.day-detail__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: border-color 0.15s;
+}
+
+.day-detail__add-btn:active {
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+/* Category manager */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-list__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+}
+
+.category-list__color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.category-list__name {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.category-list__actions {
+  display: flex;
+  gap: 4px;
+}
+
+.category-list__btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  border-radius: 50%;
+}
+
+.category-list__btn:active {
+  background: var(--bg-elevated);
+}
+
+.category-list__btn--danger:active {
+  color: var(--danger);
+}
+
+.category-list__add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 8px;
+}
