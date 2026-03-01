@@ -124,6 +124,14 @@ textarea {
   gap: 8px;
 }
 
+.header__logo {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  top: 12px;
+  left: 16px;
+}
+
 .header__today-btn {
   font-size: 13px;
   font-weight: 600;

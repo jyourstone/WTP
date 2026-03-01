@@ -1,7 +1,7 @@
 services:
-  cissi-traning:
+  wtp:
     build: .
-    container_name: cissi-traning
+    container_name: wtp
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -10,4 +10,4 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - DB_PATH=/app/data/traningskalender.db
+      - DB_PATH=/app/data/wtp.db

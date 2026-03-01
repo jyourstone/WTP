@@ -1,7 +1,7 @@
 {
-  "name": "cissi-traning",
+  "name": "wtp",
   "version": "1.0.0",
-  "description": "Träningskalender PWA",
+  "description": "WTP - Workout Training Planner",
   "type": "module",
   "scripts": {
     "start": "node server/index.js",

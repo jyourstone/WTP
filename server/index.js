@@ -23,5 +23,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Träningskalendern körs på port ${PORT}`);
+  console.log(`WTP körs på port ${PORT}`);
 });

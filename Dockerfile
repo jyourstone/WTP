@@ -17,6 +17,6 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
 
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV DB_PATH=/app/data/traningskalender.db
+ENV DB_PATH=/app/data/wtp.db
 
 CMD ["node", "server/index.js"]
