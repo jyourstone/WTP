@@ -6,6 +6,7 @@ import * as summaryModule from './summary.js';
 import { openDayDetail } from './workoutDetail.js';
 import { openCategoryManager } from './categoryManager.js';
 import { loadWorkouts } from './state.js';
+import * as pushNotifications from './pushNotifications.js';
 
 // Toast
 let toastEl;
@@ -76,7 +77,8 @@ async function init() {
   // Register service worker
   if ('serviceWorker' in navigator) {
     try {
-      await navigator.serviceWorker.register('/sw.js');
+      const registration = await navigator.serviceWorker.register('/sw.js');
+      await pushNotifications.init(registration);
     } catch {
       // SW registration failed, app still works
     }

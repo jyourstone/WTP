@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "node --watch server/index.js"
+    "dev": "node --watch server/index.js",
+    "generate-vapid": "node server/generate-vapid-keys.js"
   },
   "dependencies": {
     "better-sqlite3": "^11.7.0",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "web-push": "^3.6.7"
   }
 }

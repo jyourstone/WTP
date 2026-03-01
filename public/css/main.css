@@ -169,6 +169,7 @@ textarea {
 }
 
 .header__icon-btn {
+  position: relative;
   width: 36px;
   height: 36px;
   display: flex;
@@ -182,6 +183,22 @@ textarea {
 
 .header__icon-btn:active {
   background: var(--bg-elevated);
+}
+
+.header__icon-btn--active {
+  color: var(--accent-light);
+}
+
+.header__icon-btn--active::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--success);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
 }
 
 /* Main */

@@ -33,6 +33,14 @@ db.exec(`
 
   CREATE INDEX IF NOT EXISTS idx_workouts_date ON workouts(date);
   CREATE INDEX IF NOT EXISTS idx_workouts_category ON workouts(category_id);
+
+  CREATE TABLE IF NOT EXISTS push_subscriptions (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    endpoint   TEXT    NOT NULL UNIQUE,
+    p256dh     TEXT    NOT NULL,
+    auth       TEXT    NOT NULL,
+    created_at TEXT    NOT NULL DEFAULT (datetime('now'))
+  );
 `);
 
 // Seed default categories if table is empty
