@@ -64,19 +64,18 @@ export function renderWeekDateCell(date, currentYear, currentMonth, onClick) {
 
 export function updateIndicator(indicator, dateStr) {
   const workouts = state.get('workouts')[dateStr] || [];
+
+  // Clear any SVG from a previous 2-workout render
+  indicator.innerHTML = '';
+
   if (workouts.length === 0) {
     indicator.style.boxShadow = 'none';
     indicator.style.backgroundColor = 'transparent';
     return;
   }
 
-  const shadows = [];
   const ringWidth = 3;
-  const gap = 2;
-  let offset = ringWidth;
 
-  // Process workouts: completed ones get filled, planned get rings
-  // If only one workout and completed, use background fill
   if (workouts.length === 1) {
     const w = workouts[0];
     if (w.completed) {
@@ -89,17 +88,36 @@ export function updateIndicator(indicator, dateStr) {
     return;
   }
 
-  // Multiple workouts: concentric rings
+  if (workouts.length === 2) {
+    const [w1, w2] = workouts;
+    const id = dateStr.replace(/-/g, '');
+    const fill1 = w1.completed ? w1.category_color + '40' : 'none';
+    const fill2 = w2.completed ? w2.category_color + '40' : 'none';
+
+    indicator.style.boxShadow = 'none';
+    indicator.style.backgroundColor = 'transparent';
+    indicator.innerHTML =
+      `<svg width="32" height="32" viewBox="0 0 32 32" style="display:block;">` +
+      `<defs>` +
+      `<clipPath id="cl-${id}"><rect x="0" y="0" width="16" height="32"/></clipPath>` +
+      `<clipPath id="cr-${id}"><rect x="16" y="0" width="16" height="32"/></clipPath>` +
+      `</defs>` +
+      `<circle cx="16" cy="16" r="13" fill="${fill1}" stroke="${w1.category_color}" stroke-width="${ringWidth}" clip-path="url(#cl-${id})"/>` +
+      `<circle cx="16" cy="16" r="13" fill="${fill2}" stroke="${w2.category_color}" stroke-width="${ringWidth}" clip-path="url(#cr-${id})"/>` +
+      `</svg>`;
+    return;
+  }
+
+  // 3+ workouts: concentric rings
+  const shadows = [];
+  const gap = 2;
+  let offset = ringWidth;
+
   for (let i = workouts.length - 1; i >= 0; i--) {
     const w = workouts[i];
-    if (w.completed) {
-      shadows.push(`0 0 0 ${offset}px ${w.category_color}`);
-    } else {
-      // Ring only: colored border with transparent gap inside
-      shadows.push(`0 0 0 ${offset}px ${w.category_color}`);
-      if (offset > ringWidth) {
-        shadows.push(`0 0 0 ${offset - ringWidth}px var(--bg)`);
-      }
+    shadows.push(`0 0 0 ${offset}px ${w.category_color}`);
+    if (!w.completed && offset > ringWidth) {
+      shadows.push(`0 0 0 ${offset - ringWidth}px var(--bg)`);
     }
     offset += ringWidth + gap;
   }
